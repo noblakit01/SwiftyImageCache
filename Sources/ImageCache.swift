@@ -11,6 +11,13 @@ open class ImageCache {
     public init() {
     }
     
+    func addObservers() {
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidReceiveMemoryWarning,
+                                               object: self, queue: nil) {
+            notification in
+        }
+    }
+    
     open func loadImage(atUrl url: URL, completion: @escaping (UIImage?) -> Void) {
         let urlString = url.absoluteString
         if let image = images.object(forKey: urlString as NSString) {
