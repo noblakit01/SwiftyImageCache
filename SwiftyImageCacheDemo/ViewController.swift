@@ -28,8 +28,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.estimatedRowHeight = 92
-        tableView.rowHeight = UITableViewAutomaticDimension
     }
 }
 
@@ -50,6 +48,7 @@ class Cell: UITableViewCell {
     var url: URL? {
         didSet {
             if let url = url {
+                self.contentImageView.image = nil
                 ImageCache.default.loadImage(atUrl: url, completion: { [weak self] image in
                     self?.contentImageView.image = image
                 })
