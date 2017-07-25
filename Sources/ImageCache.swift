@@ -16,12 +16,11 @@ open class ImageCache {
     }
     
     func addObservers() {
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidReceiveMemoryWarning, object: self, queue: nil) { notification in
-            let a = 3
-            var v = 3
-            let bav = notification.debugDescription
-            let ac = bav
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveMemoryWarning), name: NSNotification.Name.UIApplicationDidReceiveMemoryWarning, object: nil)
+    }
+    
+    @objc func didReceiveMemoryWarning() {
+        
     }
     
     open func loadImage(atUrl url: URL, completion: @escaping (UIImage?) -> Void) {
