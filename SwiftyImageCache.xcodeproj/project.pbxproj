@@ -15,6 +15,16 @@
 		OBJ_17 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_8 /* ImageCache.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		FD0441431F273BFE005BF7D0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = OBJ_12;
+			remoteInfo = SwiftyImageCache;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		FD0441311F273221005BF7D0 /* SwiftyImageCacheDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftyImageCacheDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD0441331F273222005BF7D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +119,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				FD0441441F273BFE005BF7D0 /* PBXTargetDependency */,
 			);
 			name = SwiftyImageCacheDemo;
 			productName = SwiftyImageCacheDemo;
@@ -197,6 +208,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FD0441441F273BFE005BF7D0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = OBJ_12 /* SwiftyImageCache */;
+			targetProxy = FD0441431F273BFE005BF7D0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		FD0441371F273222005BF7D0 /* Main.storyboard */ = {
