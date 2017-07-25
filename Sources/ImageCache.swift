@@ -2,7 +2,11 @@ import UIKit
 
 open class ImageCache {
     
-    open static let `default` = ImageCache()
+    open static let `default` = { () -> ImageCache in 
+        let cache = ImageCache()
+        cache.addObservers()
+        return cache
+    }()
     
     var queue = DispatchQueue(label: "ImageCache")
     var workItems = NSCache<NSString, DispatchWorkItem>()
@@ -12,9 +16,11 @@ open class ImageCache {
     }
     
     func addObservers() {
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidReceiveMemoryWarning,
-                                               object: self, queue: nil) {
-            notification in
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidReceiveMemoryWarning, object: self, queue: nil) { notification in
+            let a = 3
+            var v = 3
+            let bav = notification.debugDescription
+            let ac = bav
         }
     }
     

@@ -29,6 +29,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
     }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+        var asc = 3
+        asc += 3
+    }
 }
 
 extension ViewController: UITableViewDataSource {
