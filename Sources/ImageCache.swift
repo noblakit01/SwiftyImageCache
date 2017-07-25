@@ -19,6 +19,10 @@ open class ImageCache {
         NotificationCenter.default.addObserver(self, selector: #selector(didReceiveMemoryWarning), name: NSNotification.Name.UIApplicationDidReceiveMemoryWarning, object: nil)
     }
     
+    func removeObservers() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     @objc func didReceiveMemoryWarning() {
         
     }
