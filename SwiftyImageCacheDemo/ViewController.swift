@@ -21,7 +21,6 @@ class ViewController: UIViewController {
         "http://www.hdwallpapersfreedownload.com/uploads/large/animals/dog-photo.jpg",
         "http://www.piccolaspressies.co.uk/resources/4.jpg",
         "http://www.adogsjoy.com/img/slide-1.jpg",
-        "http://bsnscb.com/data/out/57/39074288-dog-wallpapers.jpg"
     ]
     @IBOutlet weak var tableView: UITableView!
 
@@ -47,6 +46,17 @@ extension ViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! Cell
         cell.url = URL(string: urlStrings[indexPath.row])
         return cell
+    }
+}
+
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if let image = (tableView.cellForRow(at: indexPath) as? Cell)?.contentImageView.image {
+            let acd = CFGetRetainCount(image)
+            print(acd)
+        }
     }
 }
 

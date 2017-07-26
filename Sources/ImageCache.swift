@@ -32,7 +32,8 @@ open class ImageCache {
     
     open func removeUselessCache() {
         for (key, image) in images {
-            if CFGetRetainCount(image) < 2 {
+            let retainCount = CFGetRetainCount(image)
+            if retainCount < 2 {
                 images.removeValue(forKey: key)
             }
         }
