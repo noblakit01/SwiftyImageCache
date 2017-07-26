@@ -11,6 +11,7 @@ open class ImageCache {
     var queue = DispatchQueue(label: "ImageCache")
     var workItems = NSCache<NSString, DispatchWorkItem>()
     var images: [String: UIImage] = [:]
+    open var automaticRemoveUselessImage = true
     
     public init() {
     }
@@ -24,7 +25,17 @@ open class ImageCache {
     }
     
     @objc func didReceiveMemoryWarning() {
-        
+        if automaticRemoveUselessImage {
+            removeUselessCache()
+        }
+    }
+    
+    open func removeUselessCache() {
+        for (key, image) in images {
+            if CFGetRetainCount(image) < 2 {
+                images.removeValue(forKey: key)
+            }
+        }
     }
     
     open func loadImage(atUrl url: URL, completion: @escaping (UIImage?) -> Void) {
