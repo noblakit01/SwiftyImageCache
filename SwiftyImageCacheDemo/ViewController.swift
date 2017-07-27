@@ -21,7 +21,6 @@ class ViewController: UIViewController {
         "http://www.hdwallpapersfreedownload.com/uploads/large/animals/dog-photo.jpg",
         "http://www.piccolaspressies.co.uk/resources/4.jpg",
         "http://www.adogsjoy.com/img/slide-1.jpg",
-        "http://bsnscb.com/data/out/57/39074288-dog-wallpapers.jpg"
     ]
     @IBOutlet weak var tableView: UITableView!
 
@@ -49,8 +48,10 @@ class Cell: UITableViewCell {
         didSet {
             if let url = url {
                 self.contentImageView.image = nil
-                ImageCache.default.loadImage(atUrl: url, completion: { [weak self] image in
-                    self?.contentImageView.image = image
+                ImageCache.default.loadImage(atUrl: url, completion: { [weak self] (urlString, image) in
+                    if urlString == self?.url?.absoluteString {
+                        self?.contentImageView.image = image
+                    }
                 })
             }
         }
