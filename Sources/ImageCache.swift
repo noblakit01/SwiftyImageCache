@@ -18,17 +18,17 @@ open class ImageCache {
         }
     }
     
-    open func loadImage(atUrl url: URL, completion: @escaping (UIImage?) -> Void) {
+    open func loadImage(atUrl url: URL, completion: @escaping (String, UIImage?) -> Void) {
         let urlString = url.absoluteString
         if let image = images.object(forKey: urlString as NSString) {
-            completion(image)
+            completion(urlString, image)
             return
         }
         if let workItem = workItems.object(forKey: urlString as NSString) {
             workItem.notify(queue: queue, execute: { [weak self] in
                 if let image = self?.images.object(forKey: urlString as NSString) {
                     DispatchQueue.main.async {
-                        completion(image)
+                        completion(urlString, image)
                     }
                 }
             })
@@ -40,17 +40,15 @@ open class ImageCache {
                 if let image = UIImage(data: data) {
                     self?.images.setObject(image, forKey: urlString as NSString)
                     DispatchQueue.main.async {
-                        completion(image)
+                        completion(urlString, image)
                     }
-                } else {
-                    DispatchQueue.main.async {
-                        completion(nil)
-                    }
+                    return
                 }
-            } catch ( _) {
-                DispatchQueue.main.async {
-                    completion(nil)
-                }
+            } catch (let error) {
+                print(error.localizedDescription)
+            }
+            DispatchQueue.main.async {
+                completion(urlString, nil)
             }
         }
         workItems.setObject(workItem, forKey: urlString as NSString)
