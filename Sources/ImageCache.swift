@@ -38,6 +38,14 @@ open class ImageCache {
             do {
                 let data = try Data(contentsOf: url)
                 if let image = UIImage(data: data) {
+                    let cacheURL: URL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
+                    let fileName = "test.jpg"
+                    let fileURL = cacheURL.appendingPathComponent(fileName)
+                    do {
+                        try data.write(to: fileURL, options: Data.WritingOptions.atomic)
+                    } catch (let error) {
+                        print("Error write file \(error.localizedDescription)")
+                    }
                     self?.images.setObject(image, forKey: urlString as NSString)
                     DispatchQueue.main.async {
                         completion(urlString, image)
@@ -59,4 +67,6 @@ open class ImageCache {
         workItems.removeAllObjects()
         images.removeAllObjects()
     }
+    
+    
 }
