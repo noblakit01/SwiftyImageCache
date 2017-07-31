@@ -38,12 +38,13 @@ open class ImageCache {
             do {
                 let data = try Data(contentsOf: url)
                 if let image = UIImage(data: data) {
-                    let fileName = "test.jpg"
-                    let fileURL = cacheFileUrl(fileName)
-                    do {
-                        try data.write(to: fileURL, options: Data.WritingOptions.atomic)
-                    } catch (let error) {
-                        print("Error write file \(error.localizedDescription)")
+                    if let fileName = urlString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
+                        let fileURL = cacheFileUrl(fileName)
+                        do {
+                            try data.write(to: fileURL, options: Data.WritingOptions.atomic)
+                        } catch (let error) {
+                            print("Error write file \(error.localizedDescription)")
+                        }
                     }
                     self?.images.setObject(image, forKey: urlString as NSString)
                     DispatchQueue.main.async {
