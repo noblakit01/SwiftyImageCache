@@ -38,9 +38,8 @@ open class ImageCache {
             do {
                 let data = try Data(contentsOf: url)
                 if let image = UIImage(data: data) {
-                    let cacheURL: URL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
                     let fileName = "test.jpg"
-                    let fileURL = cacheURL.appendingPathComponent(fileName)
+                    let fileURL = cacheFileUrl(fileName)
                     do {
                         try data.write(to: fileURL, options: Data.WritingOptions.atomic)
                     } catch (let error) {
