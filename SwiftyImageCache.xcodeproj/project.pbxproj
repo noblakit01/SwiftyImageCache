@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0F359ED41F2F6CDF00E2EF9C /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F359ED31F2F6CDF00E2EF9C /* Function.swift */; };
+		0F359ED61F2F856B00E2EF9C /* CacheType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F359ED51F2F856B00E2EF9C /* CacheType.swift */; };
 		0F3BD9E71F2A3C570034B5CE /* SwiftyImageCache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* SwiftyImageCache.framework */; };
 		0F3BD9E91F2A3C680034B5CE /* SwiftyImageCache.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* SwiftyImageCache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FD0441341F273222005BF7D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0441331F273222005BF7D0 /* AppDelegate.swift */; };
@@ -44,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		0F359ED31F2F6CDF00E2EF9C /* Function.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
+		0F359ED51F2F856B00E2EF9C /* CacheType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheType.swift; sourceTree = "<group>"; };
 		FD0441311F273221005BF7D0 /* SwiftyImageCacheDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftyImageCacheDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD0441331F273222005BF7D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FD0441351F273222005BF7D0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			children = (
 				OBJ_8 /* ImageCache.swift */,
 				0F359ED31F2F6CDF00E2EF9C /* Function.swift */,
+				0F359ED51F2F856B00E2EF9C /* CacheType.swift */,
 			);
 			path = Sources;
 			sourceTree = SOURCE_ROOT;
@@ -230,6 +233,7 @@
 			files = (
 				OBJ_17 /* ImageCache.swift in Sources */,
 				0F359ED41F2F6CDF00E2EF9C /* Function.swift in Sources */,
+				0F359ED61F2F856B00E2EF9C /* CacheType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

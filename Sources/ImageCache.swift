@@ -8,6 +8,8 @@ open class ImageCache {
     var workItems = NSCache<NSString, DispatchWorkItem>()
     var images = NSCache<NSString, UIImage>()
     
+    open var cacheType = CacheType.disk
+    
     public init() {
     }
     
