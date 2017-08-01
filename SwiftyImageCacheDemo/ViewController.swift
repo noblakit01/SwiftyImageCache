@@ -47,8 +47,9 @@ class Cell: UITableViewCell {
     var url: URL? {
         didSet {
             if let url = url {
-                self.contentImageView.image = nil
-                ImageCache.default.loadImage(atUrl: url, completion: { [weak self] (urlString, image) in
+                contentImageView.image = nil
+                let fitSize = contentImageView.bounds.size * 2
+                ImageCache.default.loadImage(atUrl: url, fitSize: fitSize, completion: { [weak self] (urlString, image) in
                     if urlString == self?.url?.absoluteString {
                         self?.contentImageView.image = image
                     }

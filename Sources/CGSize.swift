@@ -8,11 +8,11 @@
 
 import UIKit
 
-func *(left: CGSize, right: CGFloat) -> CGSize {
+public func *(left: CGSize, right: CGFloat) -> CGSize {
     return CGSize(width: left.width * right, height: left.height * right)
 }
 
-func /(left: CGSize, right: CGFloat) -> CGSize {
+public func /(left: CGSize, right: CGFloat) -> CGSize {
     guard right != 0.0 else {
         fatalError("Can't devine by 0")
     }
