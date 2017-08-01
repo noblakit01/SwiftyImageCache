@@ -47,7 +47,8 @@ open class ImageCache {
             let workItem = DispatchWorkItem { [weak self] in
                 do {
                     let data = try Data(contentsOf: url)
-                    if let image = self?.cacheImage(data: data, key: key) ?? UIImage(data: data) {
+                    self?.cacheImage(data: data, key: key)
+                    if let image = self?.image(of: key, fitSize: size) {
                         DispatchQueue.main.async {
                             completion?(urlString, image)
                         }
@@ -85,12 +86,11 @@ open class ImageCache {
         return nil
     }
     
-    func cacheImage(data: Data, key: String) -> UIImage? {
+    func cacheImage(data: Data, key: String) {
         switch cacheType {
         case .ram:
             if let image = UIImage(data: data) {
                 images.setObject(image, forKey: key as NSString)
-                return image
             }
         case .disk:
             let fileURL = cacheFileUrl(key)
@@ -100,6 +100,5 @@ open class ImageCache {
                 print("Error write file \(error.localizedDescription)")
             }
         }
-        return nil
     }
 }
