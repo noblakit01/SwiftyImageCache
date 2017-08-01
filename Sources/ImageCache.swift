@@ -20,14 +20,14 @@ open class ImageCache {
         }
     }
     
-    open func loadImage(atUrl url: URL, completion: ((String, UIImage?) -> Void)? = nil) {
+    open func loadImage(atUrl url: URL, fitSize size: CGSize? = nil, completion: ((String, UIImage?) -> Void)? = nil) {
         let urlString = url.absoluteString
         let key = urlString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? urlString
         DispatchQueue(label: "SwiftyImageCache").async { [weak self] in
             guard self != nil else {
                 return
             }
-            if let image = self!.image(of: key) {
+            if let image = self!.image(of: key, fitSize: size) {
                 DispatchQueue.main.async {
                     completion?(urlString, image)
                 }
