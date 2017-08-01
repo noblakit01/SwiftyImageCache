@@ -20,14 +20,14 @@ open class ImageCache {
         }
     }
     
-    open func loadImage(atUrl url: URL, completion: ((String, UIImage?) -> Void)? = nil) {
+    open func loadImage(atUrl url: URL, fitSize size: CGSize? = nil, completion: ((String, UIImage?) -> Void)? = nil) {
         let urlString = url.absoluteString
         let key = urlString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? urlString
         DispatchQueue(label: "SwiftyImageCache").async { [weak self] in
             guard self != nil else {
                 return
             }
-            if let image = self!.image(of: key) {
+            if let image = self!.image(of: key, fitSize: size) {
                 DispatchQueue.main.async {
                     completion?(urlString, image)
                 }
@@ -47,7 +47,8 @@ open class ImageCache {
             let workItem = DispatchWorkItem { [weak self] in
                 do {
                     let data = try Data(contentsOf: url)
-                    if let image = self?.cacheImage(data: data, key: key) ?? UIImage(data: data) {
+                    self?.cacheImage(data: data, key: key)
+                    if let image = self?.image(of: key, fitSize: size) {
                         DispatchQueue.main.async {
                             completion?(urlString, image)
                         }
@@ -70,26 +71,26 @@ open class ImageCache {
         images.removeAllObjects()
     }
     
-    open func image(of key: String) -> UIImage? {
+    open func image(of key: String, fitSize size: CGSize? = nil) -> UIImage? {
         if let image = images.object(forKey: key as NSString) {
             return image
         }
         let fileURL = cacheFileUrl(key)
         do {
             let data = try Data(contentsOf: fileURL)
-            return UIImage(data: data)
+            let image = UIImage(data: data)
+            return size != nil ? image?.scaleToFit(in: size!) : image
         } catch (let error) {
             print("Can read with error \(error.localizedDescription)")
         }
         return nil
     }
     
-    func cacheImage(data: Data, key: String) -> UIImage? {
+    func cacheImage(data: Data, key: String) {
         switch cacheType {
         case .ram:
             if let image = UIImage(data: data) {
                 images.setObject(image, forKey: key as NSString)
-                return image
             }
         case .disk:
             let fileURL = cacheFileUrl(key)
@@ -99,6 +100,5 @@ open class ImageCache {
                 print("Error write file \(error.localizedDescription)")
             }
         }
-        return nil
     }
 }
