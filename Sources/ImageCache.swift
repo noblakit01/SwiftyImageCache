@@ -63,7 +63,7 @@ open class ImageCache {
         images.removeAllObjects()
     }
     
-    func image(of key: String) -> UIImage? {
+    open func image(of key: String) -> UIImage? {
         if let image = images.object(forKey: key as NSString) {
             return image
         }
