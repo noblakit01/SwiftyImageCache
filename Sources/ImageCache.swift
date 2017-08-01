@@ -70,14 +70,15 @@ open class ImageCache {
         images.removeAllObjects()
     }
     
-    open func image(of key: String) -> UIImage? {
+    open func image(of key: String, fitSize size: CGSize? = nil) -> UIImage? {
         if let image = images.object(forKey: key as NSString) {
             return image
         }
         let fileURL = cacheFileUrl(key)
         do {
             let data = try Data(contentsOf: fileURL)
-            return UIImage(data: data)
+            let image = UIImage(data: data)
+            return size != nil ? image?.scaleToFit(in: size!) : image
         } catch (let error) {
             print("Can read with error \(error.localizedDescription)")
         }

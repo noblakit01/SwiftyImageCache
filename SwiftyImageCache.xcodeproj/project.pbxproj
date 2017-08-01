@@ -118,8 +118,8 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_8 /* ImageCache.swift */,
-				0F359ED31F2F6CDF00E2EF9C /* Function.swift */,
 				0F359ED51F2F856B00E2EF9C /* CacheType.swift */,
+				0F359ED31F2F6CDF00E2EF9C /* Function.swift */,
 				0F3978261F30B85D00D56BE7 /* UIImage.swift */,
 				0F3978281F30C0DD00D56BE7 /* CGSize.swift */,
 			);
