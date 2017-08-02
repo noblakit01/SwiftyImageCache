@@ -18,9 +18,11 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/noblakit01/SwiftyImageCache"
   s.license      = "MIT"
 
-  s.author             = { "noblakit01" => "noblakit01@gmail.com" }
+  s.platform     = :ios, "8.0"
+
+  s.author       = { "noblakit01" => "noblakit01@gmail.com" }
   
-  s.source       = { :git => "https://github.com/noblakit01/SwiftyImageCache", :tag => s.version }
+  s.source       = { :git => "https://github.com/noblakit01/SwiftyImageCache.git", :tag => s.version }
 
   s.source_files  = "Sources/*.swift"
   s.requires_arc = true
