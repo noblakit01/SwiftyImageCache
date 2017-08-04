@@ -18,6 +18,7 @@
 		FD0441391F273222005BF7D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD0441371F273222005BF7D0 /* Main.storyboard */; };
 		FD04413B1F273222005BF7D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD04413A1F273222005BF7D0 /* Assets.xcassets */; };
 		FD04413E1F273222005BF7D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD04413C1F273222005BF7D0 /* LaunchScreen.storyboard */; };
+		FD287FBD1F34226C00180FEA /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD287FBC1F34226C00180FEA /* UIImageView.swift */; };
 		OBJ_17 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_8 /* ImageCache.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		FD04413A1F273222005BF7D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD04413D1F273222005BF7D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FD04413F1F273222005BF7D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FD287FBC1F34226C00180FEA /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		OBJ_11 /* SwiftyImageCache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyImageCache.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		OBJ_8 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				0F359ED31F2F6CDF00E2EF9C /* Function.swift */,
 				0F3978261F30B85D00D56BE7 /* UIImage.swift */,
 				0F3978281F30C0DD00D56BE7 /* CGSize.swift */,
+				FD287FBC1F34226C00180FEA /* UIImageView.swift */,
 			);
 			path = Sources;
 			sourceTree = SOURCE_ROOT;
@@ -237,6 +240,7 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_17 /* ImageCache.swift in Sources */,
+				FD287FBD1F34226C00180FEA /* UIImageView.swift in Sources */,
 				0F3978271F30B85D00D56BE7 /* UIImage.swift in Sources */,
 				0F3978291F30C0DD00D56BE7 /* CGSize.swift in Sources */,
 				0F359ED41F2F6CDF00E2EF9C /* Function.swift in Sources */,
