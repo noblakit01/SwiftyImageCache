@@ -28,6 +28,22 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let detailVC = segue.destination as? DetailViewController,
+            let urlString = sender as? String,
+            let url = URL(string: urlString) {
+            detailVC.url = url
+        }
+    }
+}
+
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        performSegue(withIdentifier: "showDetailSegue", sender: urlStrings[indexPath.row])
+    }
 }
 
 extension ViewController: UITableViewDataSource {
