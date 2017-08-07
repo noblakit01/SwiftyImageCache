@@ -64,13 +64,7 @@ class Cell: UITableViewCell {
         didSet {
             if let url = url {
                 contentImageView.image = nil
-                let fitSize = contentImageView.bounds.size * 2
-                ImageCache.default.cacheType = .disk
-                ImageCache.default.loadImage(atUrl: url, fitSize: fitSize, completion: { [weak self] (urlString, image) in
-                    if urlString == self?.url?.absoluteString {
-                        self?.contentImageView.image = image
-                    }
-                })
+                contentImageView.setUrl(url, qualityFactor: 2.0)
             }
         }
     }
