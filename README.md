@@ -33,10 +33,11 @@ $ pod install
 ## Usage
 
 ### Convenient UIImageView
-Set url to imageview
+Set url to imageview. 
 ```swift
 imageView.setUrl(url)
 ```
+Support UITableView and UICollectionView. Only need `setUrl` from any `UIImageView` in cell.
 
 ### ImageCache
 Use `ImageCache` object to cache your image from URL
