@@ -13,9 +13,12 @@ let _swiftUrlKey = malloc(4)
 extension UIImageView {
     public func setUrl(_ url: URL, qualityFactor: CGFloat? = nil, cache: ImageCache = .default, completion: ((UIImage?) -> Void)? = nil) {
         let fitSize = qualityFactor != nil ? bounds.size * qualityFactor! : nil
-        cache.loadImage(atUrl: url, fitSize: fitSize) { [weak self] (url, image) in
-            self?.image = image
-            completion?(image)
+        swiftUrlKey = url.absoluteString
+        cache.loadImage(atUrl: url, fitSize: fitSize) { [weak self] (urlStr, image) in
+            if self?.swiftUrlKey == urlStr {
+                self?.image = image
+                completion?(image)
+            }
         }
     }
     
