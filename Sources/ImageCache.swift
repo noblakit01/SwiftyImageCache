@@ -80,8 +80,7 @@ open class ImageCache {
             let data = try Data(contentsOf: fileURL)
             let image = UIImage(data: data)
             return size != nil ? image?.scaleToFit(in: size!) : image
-        } catch (let error) {
-            print("Can read with error \(error.localizedDescription)")
+        } catch ( _) {
         }
         return nil
     }
