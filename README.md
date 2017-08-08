@@ -37,7 +37,7 @@ Set url to imageview.
 ```swift
 imageView.setUrl(url)
 ```
-Support UITableView and UICollectionView. Only need `setUrl` from any `UIImageView` in cell.
+Design for `UITableView`/`UICollectionView` asynchronous image. Only need `setUrl` from any `UIImageView` in `UITableViewCell`/`UICollectionViewCell`.
 
 ### ImageCache
 Use `ImageCache` object to cache your image from URL
