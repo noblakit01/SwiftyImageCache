@@ -18,7 +18,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 use_frameworks!
 
-pod 'SwiftyImageCache', '~> 1.1'
+pod 'SwiftyImageCache', '~> 1.1.1'
 ```
 
 Then, run the following command:
