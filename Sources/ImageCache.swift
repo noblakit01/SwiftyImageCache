@@ -20,6 +20,13 @@ open class ImageCache {
         }
     }
     
+    open func set(image: UIImage, key: String) {
+        guard let data = UIImageJPEGRepresentation(image, 0.8) else {
+            return
+        }
+        cacheImage(data: data, key: key)
+    }
+    
     open func loadImage(atUrl url: URL, fitSize size: CGSize? = nil, completion: ((String, UIImage?) -> Void)? = nil) {
         let urlString = url.absoluteString
         let key = urlString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? urlString
