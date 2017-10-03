@@ -59,5 +59,8 @@ You can config `cacheType`
 	ImageCache.default.cacheType = .ram
 ```
 
+## TODO
+[Todo](https://github.com/noblakit01/SwiftyImageCache/blob/master/TODO.md)
+
 ## License
 [MIT](http://thi.mit-license.org/)
