@@ -1,0 +1,7 @@
+language: objective-c
+osx_image: xcode8.3
+
+script:
+- xcodebuild build -project SwiftyImageCache.xcodeproj -scheme SwiftyImageCache -sdk iphonesimulator
+- xcodebuild build -project SwiftyImageCache.xcodeproj -scheme SwiftyImageCacheDemo -sdk iphonesimulator
+- xcodebuild build -project SwiftyImageCache.xcodeproj -scheme SwiftyImageCache -sdk iphoneos
