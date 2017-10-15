@@ -9,6 +9,7 @@
 import UIKit
 
 extension UIImage {
+    
     func scaleToFit(in size: CGSize) -> UIImage? {
         var ratio = max(size.width / self.size.width, size.height / self.size.height)
         if ratio >= 1.0 {
@@ -26,4 +27,5 @@ extension UIImage {
         
         return newImage
     }
+
 }

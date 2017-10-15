@@ -36,17 +36,21 @@ class ViewController: UIViewController {
             detailVC.url = url
         }
     }
+    
 }
 
 extension ViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         performSegue(withIdentifier: "showDetailSegue", sender: urlStrings[indexPath.row])
     }
+    
 }
 
 extension ViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return urlStrings.count
     }
@@ -56,6 +60,7 @@ extension ViewController: UITableViewDataSource {
         cell.url = URL(string: urlStrings[indexPath.row])
         return cell
     }
+    
 }
 
 class Cell: UITableViewCell {

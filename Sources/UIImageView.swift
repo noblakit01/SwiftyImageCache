@@ -11,6 +11,7 @@ import UIKit
 let _urlCacheKey = malloc(4)
 
 extension UIImageView {
+    
     public func setUrl(_ url: URL, qualityFactor: CGFloat? = nil, cache: ImageCache = .default, completion: ((UIImage?) -> Void)? = nil) {
         let fitSize = qualityFactor != nil ? bounds.size * qualityFactor! : nil
         urlCacheKey = url.absoluteString
@@ -38,4 +39,5 @@ extension UIImageView {
             objc_setAssociatedObject(self, _urlCacheKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN);
         }
     }
+    
 }
