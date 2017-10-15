@@ -61,7 +61,7 @@ open class ImageCache {
                         }
                         return
                     }
-                } catch (let error) {
+                } catch let error {
                     print(error.localizedDescription)
                 }
                 DispatchQueue.main.async {
@@ -87,7 +87,7 @@ open class ImageCache {
             let data = try Data(contentsOf: fileURL)
             let image = UIImage(data: data)
             return size != nil ? image?.scaleToFit(in: size!) : image
-        } catch ( _) {
+        } catch {
         }
         return nil
     }
@@ -102,7 +102,7 @@ open class ImageCache {
             let fileURL = cacheFileUrl(key)
             do {
                 try data.write(to: fileURL, options: Data.WritingOptions.atomic)
-            } catch (let error) {
+            } catch let error {
                 print("Error write file \(error.localizedDescription)")
             }
         }
