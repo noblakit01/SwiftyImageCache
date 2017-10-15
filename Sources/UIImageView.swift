@@ -8,7 +8,7 @@
 
 import UIKit
 
-let _urlCacheKey = malloc(4)
+let UrlCacheKey = malloc(4)
 
 extension UIImageView {
     
@@ -33,10 +33,10 @@ extension UIImageView {
     
     private var urlCacheKey: String? {
         get {
-            return value(_urlCacheKey, "")
+            return value(UrlCacheKey, "")
         }
         set {
-            objc_setAssociatedObject(self, _urlCacheKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN);
+            objc_setAssociatedObject(self, UrlCacheKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
         }
     }
     
