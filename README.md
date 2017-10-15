@@ -1,4 +1,7 @@
 # SwiftyImageCache
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7efc2255a0924d64a45f5a4dabaedcd9)](https://www.codacy.com/app/noblakit01/SwiftyImageCache?utm_source=github.com&utm_medium=referral&utm_content=noblakit01/SwiftyImageCache&utm_campaign=badger)
+
 Helper framework to cache image with url in Swift iOS.
 
 ## Requirements
