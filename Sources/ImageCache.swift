@@ -43,7 +43,7 @@ open class ImageCache {
             
             if let workItem = self!.workItems.object(forKey: key as NSString) {
                 workItem.notify(queue: self!.queue, execute: { [weak self] in
-                    if let image = self?.images.object(forKey: key as NSString) {
+                    if let image = self?.image(of: key, fitSize: size) {
                         DispatchQueue.main.async {
                             completion?(urlString, image)
                         }
