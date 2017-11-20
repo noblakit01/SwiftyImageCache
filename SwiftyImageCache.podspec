@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "SwiftyImageCache"
-  s.version      = "1.1.1"
+  s.version      = "1.1.2"
   s.summary      = "Image Cache for iOS in Swift"
   s.description  = <<-DESC
                    Lightly, powerfully framework for iOS in swift.
