@@ -28,7 +28,7 @@ extension UIImageView {
     }
     
     fileprivate func value<T>(_ key:UnsafeMutableRawPointer?, _ defaultValue:T) -> T {
-        return (objc_getAssociatedObject(self, key) as? T) ?? defaultValue
+        return (objc_getAssociatedObject(self, key!) as? T) ?? defaultValue
     }
     
     private var urlCacheKey: String? {
@@ -36,7 +36,7 @@ extension UIImageView {
             return value(UrlCacheKey, "")
         }
         set {
-            objc_setAssociatedObject(self, UrlCacheKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+            objc_setAssociatedObject(self, UrlCacheKey!, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
         }
     }
     
