@@ -78,6 +78,13 @@ open class ImageCache {
         images.removeAllObjects()
     }
     
+    open func image(of url: URL, fileSize size: CGSize? = nil) -> UIImage? {
+        let urlString = url.absoluteString
+        let key = urlString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? urlString
+        
+        return image(of: key, fitSize: size)
+    }
+    
     open func image(of key: String, fitSize size: CGSize? = nil) -> UIImage? {
         if let image = images.object(forKey: key as NSString) {
             return image
