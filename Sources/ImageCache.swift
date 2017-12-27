@@ -4,7 +4,7 @@ open class ImageCache {
     
     open static let `default` = ImageCache()
     
-    var queue = DispatchQueue(label: "ImageCache")
+    let queue = DispatchQueue(label: "ImageCache")
     var workItems = NSCache<NSString, DispatchWorkItem>()
     var images = NSCache<NSString, UIImage>()
     
@@ -30,7 +30,7 @@ open class ImageCache {
     open func loadImage(atUrl url: URL, fitSize size: CGSize? = nil, completion: ((String, UIImage?) -> Void)? = nil) {
         let urlString = url.absoluteString
         let key = urlString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? urlString
-        DispatchQueue(label: "SwiftyImageCache").async { [weak self] in
+        DispatchQueue(label: "LoadImageQueue").async { [weak self] in
             guard self != nil else {
                 return
             }
