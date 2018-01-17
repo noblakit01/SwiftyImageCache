@@ -99,6 +99,22 @@ open class ImageCache {
         return nil
     }
     
+    open func cacheImage(_ image: UIImage, key: String) {
+        switch cacheType {
+        case .ram:
+            images.setObject(image, forKey: key as NSString)
+        case .disk:
+            if let data = UIImagePNGRepresentation(image) {
+                let fileURL = cacheFileUrl(key)
+                do {
+                    try data.write(to: fileURL, options: Data.WritingOptions.atomic)
+                } catch let error {
+                    print("Error write file \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+    
     func cacheImage(data: Data, key: String) {
         switch cacheType {
         case .ram:
