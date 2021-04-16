@@ -2,7 +2,7 @@ import UIKit
 
 open class ImageCache {
     
-    open static let `default` = ImageCache()
+    public static let `default` = ImageCache()
     
     let queue = DispatchQueue(label: "ImageCache")
     var workItems = NSCache<NSString, DispatchWorkItem>()
@@ -14,14 +14,14 @@ open class ImageCache {
     }
     
     func addObservers() {
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidReceiveMemoryWarning,
+        NotificationCenter.default.addObserver(forName: UIApplication.didReceiveMemoryWarningNotification,
                                                object: self, queue: nil) {
             notification in
         }
     }
     
     open func set(image: UIImage, key: String) {
-        guard let data = UIImageJPEGRepresentation(image, 0.8) else {
+        guard let data = image.jpegData(compressionQuality: 1) else {
             return
         }
         cacheImage(data: data, key: key)
@@ -104,7 +104,7 @@ open class ImageCache {
         case .ram:
             images.setObject(image, forKey: key as NSString)
         case .disk:
-            if let data = UIImagePNGRepresentation(image) {
+            if let data = image.pngData() {
                 let fileURL = cacheFileUrl(key)
                 do {
                     try data.write(to: fileURL, options: Data.WritingOptions.atomic)
