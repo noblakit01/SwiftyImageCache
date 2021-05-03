@@ -54,11 +54,15 @@ open class ImageCache {
             let workItem = DispatchWorkItem { [weak self] in
                 do {
                     let data = try Data(contentsOf: url)
-                    self?.cacheImage(data: data, key: key)
-                    if let image = self?.image(of: key, fitSize: size) {
+                    if let image = UIImage(data: data) {
                         DispatchQueue.main.async {
                             completion?(urlString, image)
                         }
+                        
+                        DispatchQueue.global(qos: .utility).async {
+                            self?.cacheImage(data: data, key: key)
+                        }
+                        
                         return
                     }
                 } catch let error {
