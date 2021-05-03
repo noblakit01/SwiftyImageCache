@@ -4,6 +4,13 @@ open class ImageCache {
     
     public static let `default` = ImageCache()
     
+    private let autoCleanupDays = 30
+    private var lastCleanup = UserDefaults.standard.object(forKey: "lastCleanup") as? Date ?? Date() {
+        didSet {
+            UserDefaults.standard.set(lastCleanup, forKey: "lastCleanup")
+        }
+    }
+    
     let queue = DispatchQueue(label: "ImageCache")
     var workItems = NSCache<NSString, DispatchWorkItem>()
     var images = NSCache<NSString, UIImage>()
@@ -72,11 +79,6 @@ open class ImageCache {
         }
     }
     
-    open func clear() {
-        workItems.removeAllObjects()
-        images.removeAllObjects()
-    }
-    
     open func image(of url: URL, fileSize size: CGSize? = nil) -> UIImage? {
         let urlString = url.absoluteString
         let key = urlString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? urlString
@@ -130,4 +132,23 @@ open class ImageCache {
         }
     }
     
+    open func clearLocalCache() {
+        let fileManager = FileManager.default
+        let imageDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
+        
+        if Date().timeIntervalSince(lastCleanup) > TimeInterval(autoCleanupDays * 24 * 3600) {
+            if fileManager.isDeletableFile(atPath: imageDirectory.path) {
+                do {
+                    try fileManager.removeItem(atPath: imageDirectory.path)
+                } catch {
+                    debugPrint(error.localizedDescription)
+                }
+            }
+            
+            lastCleanup = Date()
+        }
+        
+        workItems.removeAllObjects()
+        images.removeAllObjects()
+    }
 }
