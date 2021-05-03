@@ -52,9 +52,8 @@ open class ImageCache {
                 return
             }
             let workItem = DispatchWorkItem { [weak self] in
-                do {
-                    let data = try Data(contentsOf: url)
-                    if let image = UIImage(data: data) {
+                URLSession.shared.dataTask(with: url) { data, response, error in
+                    if let data = data, let image = UIImage(data: data) {
                         DispatchQueue.main.async {
                             completion?(urlString, image)
                         }
@@ -65,12 +64,8 @@ open class ImageCache {
                         
                         return
                     }
-                } catch let error {
-                    print(error.localizedDescription)
                 }
-                DispatchQueue.main.async {
-                    completion?(urlString, nil)
-                }
+                .resume()
             }
             self!.workItems.setObject(workItem, forKey: key as NSString)
             self!.queue.async(execute: workItem)
