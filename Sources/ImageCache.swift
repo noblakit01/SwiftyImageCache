@@ -4,6 +4,13 @@ open class ImageCache {
     
     public static let `default` = ImageCache()
     
+    private let autoCleanupDays = 30
+    private var lastCleanup = UserDefaults.standard.object(forKey: "lastCleanup") as? Date ?? Date() {
+        didSet {
+            UserDefaults.standard.set(lastCleanup, forKey: "lastCleanup")
+        }
+    }
+    
     let queue = DispatchQueue(label: "ImageCache")
     var workItems = NSCache<NSString, DispatchWorkItem>()
     var images = NSCache<NSString, UIImage>()
@@ -52,9 +59,8 @@ open class ImageCache {
                 return
             }
             let workItem = DispatchWorkItem { [weak self] in
-                do {
-                    let data = try Data(contentsOf: url)
-                    if let image = UIImage(data: data) {
+                URLSession.shared.dataTask(with: url) { data, response, error in
+                    if let data = data, let image = UIImage(data: data) {
                         DispatchQueue.main.async {
                             completion?(urlString, image)
                         }
@@ -65,21 +71,12 @@ open class ImageCache {
                         
                         return
                     }
-                } catch let error {
-                    print(error.localizedDescription)
                 }
-                DispatchQueue.main.async {
-                    completion?(urlString, nil)
-                }
+                .resume()
             }
             self!.workItems.setObject(workItem, forKey: key as NSString)
             self!.queue.async(execute: workItem)
         }
-    }
-    
-    open func clear() {
-        workItems.removeAllObjects()
-        images.removeAllObjects()
     }
     
     open func image(of url: URL, fileSize size: CGSize? = nil) -> UIImage? {
@@ -135,4 +132,23 @@ open class ImageCache {
         }
     }
     
+    open func clearLocalCache() {
+        let fileManager = FileManager.default
+        let imageDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
+        
+        if Date().timeIntervalSince(lastCleanup) > TimeInterval(autoCleanupDays * 24 * 3600) {
+            if fileManager.isDeletableFile(atPath: imageDirectory.path) {
+                do {
+                    try fileManager.removeItem(atPath: imageDirectory.path)
+                } catch {
+                    debugPrint(error.localizedDescription)
+                }
+            }
+            
+            lastCleanup = Date()
+        }
+        
+        workItems.removeAllObjects()
+        images.removeAllObjects()
+    }
 }
